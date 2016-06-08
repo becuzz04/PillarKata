@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Babysitter
 {
-    public static class TimeCalculator
+    public static class BabysittingRateCalculator
     {
         public static int CalculateHours(DateTime startTime, DateTime endTime)
         {
