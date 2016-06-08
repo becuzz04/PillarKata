@@ -10,7 +10,6 @@ namespace BabysitterTests
 {
     [TestFixture]
     public class BabysittingRateCalculatorTests
-
     {
         [Test]
         public void GivenAWholeNumberOfHoursReturnTheHours()
@@ -22,6 +21,12 @@ namespace BabysitterTests
         public void GivenAFractionalNumberOfHoursReturnTheWholeHours()
         {
             Assert.AreEqual(5, BabysittingRateCalculator.CalculateHours(DateTime.Parse("1/1/2016 12:00 PM"), DateTime.Parse("1/1/2016 5:45 PM")));
+        }
+
+        [Test]
+        public void EnsureBabysittingDoesNotStartBeforeFivePm()
+        {
+            Assert.Catch<ArgumentOutOfRangeException>(() => BabysittingRateCalculator.CalculatePayment(DateTime.Parse("1/1/2016 12:00 PM"), DateTime.Parse("1/1/2016 5:45 PM"), DateTime.Parse("1/1/2016 5:45 PM")));
         }
     }
 }

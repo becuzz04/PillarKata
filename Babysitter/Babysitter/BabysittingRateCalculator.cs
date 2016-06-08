@@ -13,5 +13,14 @@ namespace Babysitter
             TimeSpan timeDifference = endTime - startTime;
             return timeDifference.Hours;
         }
+
+        public static decimal CalculatePayment(DateTime startTime, DateTime endTime, DateTime bedTime)
+        {
+            if (startTime.Hour < 17)
+            {
+                throw new ArgumentOutOfRangeException("Babysitting time cannot start before 5:00 PM.");
+            }
+            return 0m;
+        }
     }
 }
