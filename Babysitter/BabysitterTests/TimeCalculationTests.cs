@@ -16,5 +16,11 @@ namespace BabysitterTests
         {
             Assert.AreEqual(5, TimeCalculator.CalculateHours(DateTime.Parse("1/1/2016 12:00 PM"), DateTime.Parse("1/1/2016 5:00 PM")));
         }
+
+        [Test]
+        public void GivenAFractionalNumberOfHoursReturnTheWholeHours()
+        {
+            Assert.AreEqual(5, TimeCalculator.CalculateHours(DateTime.Parse("1/1/2016 12:00 PM"), DateTime.Parse("1/1/2016 5:45 PM")));
+        }
     }
 }

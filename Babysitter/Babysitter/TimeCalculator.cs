@@ -10,7 +10,8 @@ namespace Babysitter
     {
         public static int CalculateHours(DateTime startTime, DateTime endTime)
         {
-            throw new NotImplementedException();
+            TimeSpan timeDifference = endTime - startTime;
+            return timeDifference.Hours;
         }
     }
 }
