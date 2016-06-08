@@ -18,7 +18,8 @@ namespace Babysitter
 
         public static decimal CalculatePayment(DateTime startTime, DateTime endTime, DateTime bedTime)
         {
-            if (startTime.Hour < FIVE_PM_HOUR)
+            DateTime fiveOClockStartTime = startTime.Date.AddHours(FIVE_PM_HOUR);
+            if (startTime < fiveOClockStartTime)
             {
                 throw new ArgumentOutOfRangeException("Babysitting time cannot start before 5:00 PM.");
             }
