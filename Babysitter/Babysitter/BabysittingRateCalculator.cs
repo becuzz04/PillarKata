@@ -49,7 +49,10 @@ namespace Babysitter
             }
 
             int hoursFromStartToBedtime = CalculateHours(startTime, bedTime < endTime ? bedTime : endTime);
-            return hoursFromStartToBedtime * START_TO_BEDTIME_RATE;
+
+            DateTime midnight = startTime.Date.AddDays(1);
+            int hoursFromBedtimeToMidnight = CalculateHours(bedTime, midnight < endTime ? midnight : endTime);
+            return hoursFromStartToBedtime * START_TO_BEDTIME_RATE + hoursFromBedtimeToMidnight * BEDTIME_TO_MIDNIGHT_RATE;
         }
     }
 }
