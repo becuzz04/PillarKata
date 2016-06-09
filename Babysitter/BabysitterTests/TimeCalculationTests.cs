@@ -88,5 +88,11 @@ namespace BabysitterTests
         {
             Assert.AreEqual(68m, BabysittingRateCalculator.CalculatePayment(DateTime.Parse("1/1/2016 5:00 PM"), DateTime.Parse("1/1/2016 11:00 PM"), DateTime.Parse("1/1/2016 10:00 PM")));
         }
+
+        [Test]
+        public void ValidateCalculationOfPaymentFromMidnightToEnd()
+        {
+            Assert.AreEqual(140m, BabysittingRateCalculator.CalculatePayment(DateTime.Parse("1/1/2016 5:00 PM"), DateTime.Parse("1/2/2016 4:00 AM"), DateTime.Parse("1/1/2016 10:00 PM")));
+        }
     }
 }

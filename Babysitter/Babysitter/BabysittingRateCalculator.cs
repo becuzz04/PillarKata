@@ -52,7 +52,9 @@ namespace Babysitter
 
             DateTime midnight = startTime.Date.AddDays(1);
             int hoursFromBedtimeToMidnight = CalculateHours(bedTime, midnight < endTime ? midnight : endTime);
-            return hoursFromStartToBedtime * START_TO_BEDTIME_RATE + hoursFromBedtimeToMidnight * BEDTIME_TO_MIDNIGHT_RATE;
+
+            int hoursFromMidnightToEnd = CalculateHours(midnight, endTime);
+            return hoursFromStartToBedtime * START_TO_BEDTIME_RATE + hoursFromBedtimeToMidnight * BEDTIME_TO_MIDNIGHT_RATE + hoursFromMidnightToEnd * MIDNIGHT_TO_FOUR_AM_RATE;
         }
     }
 }
