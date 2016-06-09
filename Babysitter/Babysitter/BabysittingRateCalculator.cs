@@ -48,7 +48,7 @@ namespace Babysitter
                 throw new ArgumentOutOfRangeException("End time cannot be after 4 AM.");
             }
 
-            int hoursFromStartToBedtime = CalculateHours(startTime, bedTime);
+            int hoursFromStartToBedtime = CalculateHours(startTime, bedTime < endTime ? bedTime : endTime);
             return hoursFromStartToBedtime * START_TO_BEDTIME_RATE;
         }
     }
