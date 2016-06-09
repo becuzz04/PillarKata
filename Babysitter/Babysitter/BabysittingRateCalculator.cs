@@ -10,11 +10,20 @@ namespace Babysitter
     {
         private const int FIVE_PM_HOUR = 17;
         private const int FOUR_AM_HOUR = 4;
+        private const int MAX_HOURS_POSSIBLE = 11;
+
+        private const decimal START_TO_BEDTIME_RATE = 12m;
+        private const decimal BEDTIME_TO_MIDNIGHT_RATE = 8m;
+        private const decimal MIDNIGHT_TO_FOUR_AM_RATE = 16m;
 
         public static int CalculateHours(DateTime startTime, DateTime endTime)
         {
+            if (endTime < startTime)
+            {
+                return 0;
+            }
             TimeSpan timeDifference = endTime - startTime;
-            return timeDifference.Hours;
+            return (int)timeDifference.TotalHours;
         }
 
         public static decimal CalculatePayment(DateTime startTime, DateTime endTime, DateTime bedTime)
@@ -23,8 +32,8 @@ namespace Babysitter
             {
                 throw new ArgumentException("Start time must be before end time.");
             }
-            TimeSpan totalDifference = endTime - startTime;
-            if (totalDifference.Days >= 1)
+            int hourDifference = CalculateHours(startTime, endTime);
+            if (hourDifference > MAX_HOURS_POSSIBLE)
             {
                 throw new ArgumentException("Time between start and end is too long.");
             }
@@ -38,7 +47,9 @@ namespace Babysitter
             {
                 throw new ArgumentOutOfRangeException("End time cannot be after 4 AM.");
             }
-            return 0m;
+
+            int hoursFromStartToBedtime = CalculateHours(startTime, bedTime);
+            return hoursFromStartToBedtime * START_TO_BEDTIME_RATE;
         }
     }
 }

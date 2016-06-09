@@ -24,6 +24,12 @@ namespace BabysitterTests
         }
 
         [Test]
+        public void EnsureHoursCalculationReturnsZeroIfEndIsAfterStart()
+        {
+            Assert.AreEqual(0, BabysittingRateCalculator.CalculateHours(DateTime.Parse("1/1/2016 10:00 PM"), DateTime.Parse("1/1/2016 5:45 PM")));
+        }
+
+        [Test]
         public void EnsureBabysittingDoesNotStartBeforeFivePm()
         {
             Assert.Catch<ArgumentOutOfRangeException>(() => BabysittingRateCalculator.CalculatePayment(DateTime.Parse("1/1/2016 12:00 PM"), DateTime.Parse("1/1/2016 5:45 PM"), DateTime.Parse("1/1/2016 5:45 PM")));
@@ -57,6 +63,12 @@ namespace BabysitterTests
         public void EnsureNightNotLongerThanADay()
         {
             Assert.Catch<ArgumentException>(() => BabysittingRateCalculator.CalculatePayment(DateTime.Parse("1/1/2016 6:00 PM"), DateTime.Parse("1/3/2016 4:00 AM"), DateTime.Parse("1/1/2016 5:45 PM")));
+        }
+
+        [Test]
+        public void ValidateCalculationOfPaymentFromStartToBedtime()
+        {
+            Assert.AreEqual(60m, BabysittingRateCalculator.CalculatePayment(DateTime.Parse("1/1/2016 5:00 PM"), DateTime.Parse("1/1/2016 10:00 PM"), DateTime.Parse("1/1/2016 10:00 PM")));
         }
     }
 }
